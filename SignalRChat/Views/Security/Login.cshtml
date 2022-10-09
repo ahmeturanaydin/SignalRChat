@@ -1,0 +1,207 @@
+﻿@*@model SignalRChat.Models.Users
+    @{
+        ViewBag.Title = "Login";
+    }
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bc" />
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <title>Login</title>
+        <style>
+            html{
+                width: 100%; height: 100%; overflow:hidden;
+            }
+            body {
+                width: 100%;
+                height: 100%;
+                font-family: 'Open Sans', sans-serif;
+                background: rgb(106,98,227);
+                background: linear-gradient(90deg, rgba(106,98,227,0.892386813123687) 3%, rgba(25,223,70,1) 50%, rgba(0,212,255,0.7719386338519783) 98%);
+            }
+            .Login {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -150px 0 0 -150px;
+                width: 300px;
+                height: 300px;
+            }
+            .Login h2{
+                color:#fff; text-shadow:0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; justify-content:center;
+            }
+            input {
+                width: 100%;
+                margin-bottom: 10px;
+                background: rgba(0,0,0,0.3);
+                border: none;
+                outline: none;
+                padding: 10px;
+                font-size: 13px;
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+                border: 1px solid rgba(0,0,0,0.3);
+                border-radius: 4px;
+            }
+            .input:focus {
+                box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center align-items-center" style="height:100vh">
+
+                <div class="Login">
+                    <h2>LOGIN PAGE</h2>
+                    @ViewBag.Mesaj
+                    @using (Html.BeginForm("Login", "Security", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <input name="username" type="text" placeholder="Kullanıcı Adı" class="form-group" />
+
+                        </div>
+                        <div class="form-group">
+                            <input name="password" type="password" placeholder="Parola" class="form-group" />
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Login" />
+
+                        <a href="~/Home/Create">Kayıt Ol</a>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+    </html>
+*@
+
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;@*Login sayfasında layout kullanmamak için null verdim *@
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--BU SAYFADA LAYOUT KULLANMADIGIMIZ ICIN SCRİPT VE HEAD  KISIMLARINI LAYOUT'A AKTARMIYORUM -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/favicon.png">
+    <title>Chat Hub </title>
+    <!-- ===== Bootstrap CSS ===== -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- ===== Plugin CSS ===== -->
+    <!-- ===== Animation CSS ===== -->
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <!-- ===== Custom CSS ===== -->
+    <link href="~/Content/style.css" rel="stylesheet">
+    <!-- ===== Color CSS ===== -->
+    <link href="~/Content/red.css" id="theme" rel="stylesheet">
+
+</head>
+
+
+<body class="mini-sidebar">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    <section id="wrapper" class="login-register">
+        <div class="login-box" style="border-radius: 15px;">
+            <div class="white-box">
+                <form class="form-horizontal form-material" id="loginform" asp-controller="Security" asp-action="Login" method="post">
+                    <!--asp-controller ve asp-action ile veriyi göndereceğimiz adresi belirtiyoruz method u da post vermek gerektiğini unutmuyoruz-->
+                    <h3 class="box-title m-b-20" style="text-align: center">Giriş Yap</h3>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" name="username" type="text" required="" placeholder="Kullanıcı Adı">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" name="password" type="password" required="" placeholder="Şifre">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-primary pull-left p-t-0">
+                                <input id="checkbox-signup" type="checkbox">
+                                <label for="checkbox-signup"> Beni Hatırla</label>
+                            </div>
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Şifremi Unuttum</a>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Giriş Yap</button>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <a href="~/Home/Create" class="btn btn-info btn-lg btn-block waves-effect waves-light">Kayıt ol</a>
+                        </div>
+                    </div>
+                   
+                    @ViewBag.Mesaj
+
+                </form>
+                <form class="form-horizontal" id="recoverform" action="index.html">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h3>Şifre Sıfırlama</h3>
+                            <p class="text-muted">Kayıtlı olan Email adresinizi girin ve gönderilen sıfırlama linkine tıklayın. </p>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Email Adresiniz">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block waves-effect waves-light" type="submit">Sıfırla</button>
+                            <a href="~/Security/Login" id="geriBtnID" class="btn btn-info btn-lg btn-block waves-effect waves-light">Geri Dön</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!--BU SAYFADA LAYOUT KULLANMADIGIMIZ ICIN SCRİPT VE HEAD  KISIMLARINI LAYOUT'A AKTARMIYORUZ -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="~/Content/sidebarmenu.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="~/Content/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Content/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Content/custom.js"></script>
+    <!--Style Switcher -->
+    <script src="~/Content/jQuery.style.switcher.js"></script>
+
+    <script src="~/Content1/custom.js"></script>
+
+</body>
+
+</html>
